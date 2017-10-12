@@ -4,16 +4,23 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.*;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 
 public class flappyBird implements ActionListener,MouseListener,KeyListener
@@ -30,6 +37,7 @@ public class flappyBird implements ActionListener,MouseListener,KeyListener
 	public flappyBird()
 	{
 		JFrame jframe = new JFrame();
+		
 		renderer = new Renderer();
 		rand = new Random();
 		
@@ -41,7 +49,9 @@ public class flappyBird implements ActionListener,MouseListener,KeyListener
 		jframe.addKeyListener(this);
 		jframe.setResizable(false);
 		jframe.setTitle("Flappy Bird");
+		
 		jframe.setVisible(true);
+		
 		
 		bird = new Rectangle(WIDTH /2 -10,HEIGHT / 2 -10,20,20);
 		columns = new ArrayList<Rectangle>();
@@ -50,7 +60,7 @@ public class flappyBird implements ActionListener,MouseListener,KeyListener
 		addColumn(true);
 		addColumn(true);
 		addColumn(true);
-		
+	
 		timer.start();
 
 	}
@@ -197,10 +207,116 @@ public class flappyBird implements ActionListener,MouseListener,KeyListener
 	
 	public void repaint(Graphics g)
 	{
-		g.setColor(Color.cyan);
+		
+		int alpha = 127; // 50% transparent
+		Color myColour = new Color(0, 255, 0, alpha);
+		Color myColour2 = new Color(238, 130, 238, alpha);
+		
+		
+		
+		g.setColor(Color.black);
 		g.fillRect(0,0,WIDTH,HEIGHT);
 		
-		g.setColor(Color.red);
+		g.setColor(myColour2);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		g.setColor(Color.white);
+		g.fillOval(600, 100, 100, 100);
+		
+		g.setColor(Color.white);
+		g.drawOval(100, 100, 7, 7);
+		g.fillOval(200, 200, 7, 7);
+		g.fillOval(300, 300, 7, 7);
+		g.fillOval(150, 290, 7, 7);
+		g.fillOval(350, 100, 7, 7);
+		g.fillOval(100, 100, 7, 7);
+		g.fillOval(100, 100, 7, 7);
+		g.fillOval(500, 100, 7, 7);
+		g.fillOval(600, 470, 7, 7);
+		g.fillOval(700, 300, 7, 7);
+		g.fillOval(100, 20, 7, 7);
+		g.fillOval(100, 320, 7, 7);
+		g.fillOval(300, 10, 7, 7);
+		g.fillOval(450, 210, 7, 7);
+		g.fillOval(670, 20, 7, 7);
+		g.fillOval(540, 300, 7, 7);
+		g.fillOval(50, 200, 7, 7);
+		g.fillOval(470, 400, 7, 7);
+		
+		
+		
+		g.fill3DRect(100, 400, 200, 250, true);
+		g.drawLine(100, 400, 80, 420);
+		g.drawLine(80, 420, 80, 700);
+		
+		g.fill3DRect(400, 500, 100, 200, true);
+		g.drawLine(400, 500, 380, 520);
+		g.drawLine(380, 520, 380, 700);
+		
+		g.setColor(myColour);
+		
+		//1st grass//
+		g.fillOval(100, 600, 30, 30);
+		g.fillOval(110, 590, 30, 30);
+		g.fillOval(120, 580, 30, 30);
+		g.fillOval(130, 590, 30, 30);
+		g.fillOval(140, 600, 30, 30);
+		g.fillOval(120, 610, 30, 30);
+		
+		//2nd grass//
+		g.fillOval(300, 600, 30, 30);
+		g.fillOval(310, 590, 30, 30);
+		g.fillOval(320, 580, 30, 30);
+		g.fillOval(330, 590, 30, 30);
+		g.fillOval(340, 600, 30, 30);
+		g.fillOval(320, 610, 30, 30);
+		
+		g.fillOval(600, 600, 30, 30);
+		g.fillOval(610, 590, 30, 30);
+		g.fillOval(620, 580, 30, 30);
+		g.fillOval(630, 590, 30, 30);
+		g.fillOval(640, 600, 30, 30);
+		g.fillOval(620, 610, 30, 30);
+		
+		g.fillOval(55, 610, 20, 20);
+		g.fillOval(60, 605, 20, 20);
+		g.fillOval(70, 593, 20, 20);
+		g.fillOval(80, 605, 20, 20);
+		g.fillOval(85, 610, 20, 20);
+		g.fillOval(70, 620, 20, 20);
+		
+		g.fillOval(155, 610, 20, 20);
+		g.fillOval(160, 605, 20, 20);
+		g.fillOval(170, 593, 20, 20);
+		g.fillOval(180, 605, 20, 20);
+		g.fillOval(185, 610, 20, 20);
+		g.fillOval(170, 620, 20, 20);
+		
+		g.fillOval(355, 610, 20, 20);
+		g.fillOval(360, 605, 20, 20);
+		g.fillOval(370, 593, 20, 20);
+		g.fillOval(380, 605, 20, 20);
+		g.fillOval(385, 610, 20, 20);
+		g.fillOval(370, 620, 20, 20);
+		
+		g.fillOval(655, 610, 20, 20);
+		g.fillOval(660, 605, 20, 20);
+		g.fillOval(670, 593, 20, 20);
+		g.fillOval(680, 605, 20, 20);
+		g.fillOval(685, 610, 20, 20);
+		g.fillOval(670, 620, 20, 20);
+		
+		g.fillOval(455, 610, 20, 20);
+		g.fillOval(460, 605, 20, 20);
+		g.fillOval(470, 593, 20, 20);
+		g.fillOval(480, 605, 20, 20);
+		g.fillOval(485, 610, 20, 20);
+		g.fillOval(470, 620, 20, 20);
+		
+		
+		
+		
+		g.setColor(Color.orange);
 		g.fillRect(bird.x,bird.y,bird.width,bird.height);
 		
 		g.setColor(Color.orange);
@@ -224,7 +340,7 @@ public class flappyBird implements ActionListener,MouseListener,KeyListener
 		}
 
 		if(gameOver)
-		{
+		{  
 			g.drawString("GAME OVER!", 100, HEIGHT / 2 - 50);
 		}
 		
@@ -237,6 +353,7 @@ public class flappyBird implements ActionListener,MouseListener,KeyListener
 public static void main(String args[])
 	{
 		flappyBird = new flappyBird();
+		
 		
 	}
 
